@@ -14,3 +14,7 @@ textual = "^0.88.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+tuiker = "tuiker:main"
+

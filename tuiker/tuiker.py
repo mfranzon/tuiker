@@ -159,7 +159,11 @@ class DockerContainerApp(App):
             print(f"Error fetching details for container {button_id}: {e}")
 
 
-if __name__ == "__main__":
+def main():
+    """Entry point for the tuiker application."""
     app = DockerContainerApp()
     app.run()
 
+
+if __name__ == "__main__":
+    main()
