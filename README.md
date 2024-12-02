@@ -36,7 +36,7 @@
 poetry install
 ```
 
-# Usage
+## Usage
 
 Run the following command to start the app:
 
