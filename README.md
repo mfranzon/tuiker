@@ -53,7 +53,7 @@ poetry run tuiker
 git checkout -b feature/your-feature
 ```
 
-3, Commit your changes:
+3. Commit your changes:
 
 ```bash
 git commit -m 'Add a new feature'
