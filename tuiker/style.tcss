@@ -1,0 +1,5 @@
+Label {   
+    background: $boost;
+    margin: 1;
+    padding: 1;
+}

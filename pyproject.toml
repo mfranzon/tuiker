@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "tuiker"
+version = "0.1.0"
+description = ""
+authors = ["mfranzon <43796979+mfranzon@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+docker = "^7.1.0"
+textual = "^0.88.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
