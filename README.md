@@ -18,7 +18,7 @@
 
 ## Requirements
 
-- Python 3.10 or later
+- Python 3.12 or later
 - Docker Engine installed and running
 - Poetry for dependency management
 
