@@ -41,6 +41,6 @@ poetry install
 Run the following command to start the app:
 
 ```bash
-Copy code
+poetry run tuiker
 ```
 
