@@ -16,5 +16,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-tuiker = "tuiker.tuiker:main"
+tuiker = "main:main"
 
