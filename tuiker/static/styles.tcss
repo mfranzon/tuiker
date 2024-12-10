@@ -1,0 +1,60 @@
+Container {
+    layout: grid;
+    grid-size: 2 2;
+    grid-rows: 1fr;
+    grid-columns: 1fr;
+    grid-gutter: 1 2;
+    margin: 1;
+}
+
+#running {
+    row-span: 1;
+    column-span: 1;
+}
+
+RunningContainersWidget {
+    height: 100h;
+    border: grey;
+}
+
+RunningContainersWidget:focus-within {
+    border: heavy $accent;
+}
+
+#exited {
+    row-span: 1;
+    column-span: 1;
+}
+
+ExitedContainersWidget {
+    height: 100h;
+    border: grey;
+}
+
+ExitedContainersWidget:focus-within {
+    border: heavy $accent;
+}
+
+#logs {
+    row-span: 2;
+    column-span: 1;
+}
+
+ContainerLogsWidget {
+    padding: 1;
+    height: 100h;
+    border: grey;
+}
+
+ContainerLogsWidget:focus-within {
+    border: heavy $accent;
+}
+
+DataTable {
+    margin: 1;
+}
+
+RichLog {
+    margin: 1;
+}
+
