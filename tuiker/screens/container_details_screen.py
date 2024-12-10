@@ -1,9 +1,9 @@
 from textual.screen import Screen
 from textual.containers import Vertical, Horizontal
 from textual.widgets import Label, Button, ContentSwitcher
-from tabs.logs_tab import LogsTab
-from tabs.resources_tab import ResourcesTab
-from tabs.shell_tab import ShellTab
+from tuiker.tabs.logs_tab import LogsTab
+from tuiker.tabs.resources_tab import ResourcesTab
+from tuiker.tabs.shell_tab import ShellTab
 
 
 class ContainerDetailsScreen(Screen):

@@ -2,7 +2,7 @@ import docker
 from textual.app import App, ComposeResult
 from textual.containers import Vertical
 from textual.widgets import Header, Label, Button
-from screens.container_details_screen import ContainerDetailsScreen
+from tuiker.screens.container_details_screen import ContainerDetailsScreen
 
 
 class DockerContainerApp(App):
@@ -43,3 +43,13 @@ class DockerContainerApp(App):
             )
         except Exception as e:
             print(f"Error fetching details for container {button_id}: {e}")
+
+
+def main():
+    """Entry point for the application."""
+    app = DockerContainerApp()
+    app.run()
+
+
+if __name__ == "__main__":
+    main()
