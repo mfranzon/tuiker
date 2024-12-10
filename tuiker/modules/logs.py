@@ -1,23 +1,39 @@
 from textual.containers import VerticalScroll
 from textual.widgets import RichLog
-from tuiker.utils.docker_utils import get_docker_client
+from textual.timer import Timer
+from tuiker.utils.docker_utils import get_container_logs
 
 
 class ContainerLogsWidget(VerticalScroll):
+    """Widget to display and refresh logs for a selected container."""
+
     BORDER_TITLE = "Container Logs"
 
     def compose(self):
-        yield RichLog(wrap=True, id="log-view")
+        yield RichLog(wrap=True)
 
-    def display_logs(self, container_name):
+    def on_mount(self):
+        """Set up a timer for refreshing logs."""
+        self.log_timer: Timer | None = None
+
+    def display_logs(self, container_name: str):
+        """Display logs for the selected container."""
+        self.selected_container = container_name
+        self.refresh_logs()  # Immediately fetch logs
+        if self.log_timer:
+            self.log_timer.stop()
+        self.log_timer = self.set_interval(2, self.refresh_logs)
+
+    def refresh_logs(self):
         """Fetch and display logs for the selected container."""
-        log_view = self.query_one("#log-view", RichLog)
-        log_view.clear()
-        try:
-            client = get_docker_client()
-            container = client.containers.get(container_name)
-            logs = container.logs(tail=50).decode("utf-8")  # Show the last 50 lines
-            log_view.write(logs)
-        except Exception as e:
-            log_view.write(f"Error fetching logs: {e}")
+        if hasattr(self, "selected_container") and self.selected_container:
+            logs = get_container_logs(self.selected_container)
+            log_widget = self.query_one(RichLog)
+            log_widget.clear()  # Clear old logs
+            log_widget.write(logs)
+
+    def stop_refresh(self):
+        """Stop the log refresh timer."""
+        if self.log_timer:
+            self.log_timer.stop()
 

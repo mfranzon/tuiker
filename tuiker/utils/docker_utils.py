@@ -1,5 +1,18 @@
 import docker
 
+client = docker.from_env()
+
+
+def get_container_logs(container_name: str) -> str:
+    """Fetch logs for a specific container."""
+    try:
+        container = client.containers.get(container_name)
+        return container.logs(tail=100).decode(
+            "utf-8"
+        )  # Get the last 100 lines of logs
+    except Exception as e:
+        return f"Error fetching logs: {e}"
+
 
 def get_docker_client():
     """Get a Docker client instance."""
