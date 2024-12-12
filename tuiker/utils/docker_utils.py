@@ -36,3 +36,23 @@ def execute_command(container_name, command):
         return result.output.decode("utf-8")
     except Exception as e:
         return f"Error executing command: {str(e)}"
+
+
+def stop_container(container_name: str) -> None:
+    """Stop a container by name."""
+    try:
+        container = client.containers.get(container_name)
+        container.stop()
+        print(f"Container {container_name} stopped successfully.")
+    except Exception as e:
+        print(f"Error stopping container {container_name}: {e}")
+
+
+def remove_container(container_name: str) -> None:
+    """Remove a container by name."""
+    try:
+        container = client.containers.get(container_name)
+        container.remove()
+        print(f"Container {container_name} removed successfully.")
+    except Exception as e:
+        print(f"Error removing container {container_name}: {e}")
