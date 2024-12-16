@@ -44,6 +44,9 @@ Run the following command to start the app:
 poetry run tuiker
 ```
 
+https://github.com/user-attachments/assets/1e12f70d-7250-4421-91d4-6050e9b05900
+
+
 # Contributing
 1. Fork the repository.
 
