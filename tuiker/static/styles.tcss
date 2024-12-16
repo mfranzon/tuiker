@@ -58,3 +58,24 @@ RichLog {
     margin: 1;
 }
 
+DockerComposeTreeWidge {
+    padding: 1;
+    height: 200h;
+    border: grey;
+}
+
+#services {
+    row-span: 1;
+    column-span: 1;
+}
+
+DockerComposeServicesWidget {
+    padding: 1;
+    height: 200h;
+    border: grey;
+}
+
+#file_tree {
+    row-span: 1;
+    column-span: 1;
+}

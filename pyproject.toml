@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.12"
 docker = "^7.1.0"
 textual = "^0.88.1"
+pyyaml = "^6.0.2"
 
 
 [build-system]

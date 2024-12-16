@@ -5,6 +5,7 @@ from tuiker.modules.containers import RunningContainersWidget, ExitedContainersW
 from tuiker.modules.logs import ContainerLogsWidget
 from tuiker.modules.commands import ContainerCommandsWidget
 from tuiker.utils.docker_utils import stop_container, remove_container, get_containers
+from tuiker.modules.compose import DockerComposeTreeWidget, DockerComposeServicesWidget
 
 
 class DockerApp(App):
@@ -16,20 +17,51 @@ class DockerApp(App):
         ("ctrl+r", "refresh()", "Refresh Containers"),
         ("ctrl+s", "stop_container()", "Stop Selected Container"),
         ("ctrl+x", "remove_all_exited()", "Remove Exited Container"),
+        ("ctrl+t", "toggle_tabs()", "Toggle Tabs"),
     ]
 
     def compose(self) -> ComposeResult:
-        yield Container(
+        """Initial layout with container and compose views."""
+        self.container_view = Container(
             VerticalGroup(RunningContainersWidget(), id="running"),
             VerticalGroup(ExitedContainersWidget(), id="exited"),
             VerticalGroup(ContainerLogsWidget(), id="logs"),
             VerticalGroup(ContainerCommandsWidget(), id="commands"),
         )
+
+        self.compose_view = Container(
+            VerticalGroup(DockerComposeTreeWidget(), id="file_tree"),
+            VerticalGroup(
+                DockerComposeServicesWidget(id="compose_services"), id="services"
+            ),
+        )
+
+        yield self.container_view
         yield Footer()
+
+    def on_mount(self) -> None:
+        """Set up the app on startup."""
+        self.current_tab = "containers"
+        self.compose_view.visible = False
+        self.refresh(recompose=False)
 
     def action_refresh(self) -> None:
         """Refresh the app."""
         self.refresh(recompose=True)
+
+    def action_toggle_tabs(self) -> None:
+        """Toggle between container and compose views."""
+        if self.current_tab == "containers":
+            self.current_tab = "compose"
+            self.container_view.visible = False
+            self.compose_view.visible = True
+            self.mount(self.compose_view)
+        else:
+            self.current_tab = "containers"
+            self.compose_view.visible = False
+            self.container_view.visible = True
+            self.mount(self.container_view)
+            self.refresh(recompose=True)
 
     def action_stop_container(self) -> None:
         """Stop the selected container"""
